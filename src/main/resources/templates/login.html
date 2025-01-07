@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/style/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/style/style.css}" rel="stylesheet">
+    <title>Login</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-8 txt_padding">
+                    <h4>Login</h4>
+                </div>
+                <div class="col-4">
+                    <p style="text-align: right;">
+                        <a th:href="@{/}" class="log_reg">Home</a>
+                        <a th:href="@{/registration}" class="log_reg">Регистрация</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <content>
+        <div class="container">
+            <div class="row content_row_main">
+                <div class="col-3 content_col_1">
+                    <div class="block_blue txt_padding"></div>
+                </div>
+                <div class="col-9 content_col_2">
+                    <h4 class="text-center">Please sign in</h4>
+                    <div th:if="${error}" class="text-center">Unable to login. Check your username and password.</div>
+
+                    <form method="post" th:action="@{/login}" id="loginForm">
+                        <div class="mb-3">
+                            <input type="email" name="email" class="form-control" id="email"
+                                aria-describedby="emailHelp" placeholder="Email address">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" name="password" class="form-control" id="password"
+                                placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100" value="Login">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </content>
+    <script th:src="@{js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

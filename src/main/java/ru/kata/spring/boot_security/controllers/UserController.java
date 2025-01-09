@@ -1,26 +1,24 @@
 package ru.kata.spring.boot_security.controllers;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import ru.kata.spring.boot_security.forms.RegistrationForm;
-import ru.kata.spring.boot_security.models.ModelUser;
-import ru.kata.spring.boot_security.services.UserService;
+import ru.kata.spring.boot_security.dto.UserDTO;
+import ru.kata.spring.boot_security.model.User;
+import ru.kata.spring.boot_security.service.UserService;
 
 @Controller
 public class UserController {
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/add_user")
-    public String processAddUser(RegistrationForm form) {
-        userService.save(form.toUser(passwordEncoder));
+    public String processAddUser(UserDTO form) {
+        System.out.println("FALSE");
+        userService.save(form.toUser());
         return "redirect:/admin";
     }
 
@@ -31,8 +29,9 @@ public class UserController {
     }
 
     @PostMapping("/edit_user")
-    public String processEditUser(ModelUser user) {
-        userService.update(user, passwordEncoder);
+    public String processEditUser(User user) {
+        System.out.println("TRUE:" + user);
+        userService.update(user);
         return "redirect:/admin";
     }
 }

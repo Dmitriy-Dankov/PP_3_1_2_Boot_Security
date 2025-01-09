@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import ru.kata.spring.boot_security.models.ModelUser;
-import ru.kata.spring.boot_security.services.UserServiceImpl;
+import ru.kata.spring.boot_security.model.User;
+import ru.kata.spring.boot_security.service.UserServiceImpl;
 
 @Controller
 public class PagesController {
@@ -15,7 +15,7 @@ public class PagesController {
     private UserServiceImpl userService;
 
     @GetMapping("/admin")
-    public String adminEndpoint(@AuthenticationPrincipal ModelUser currentUser, Model model) {
+    public String adminEndpoint(@AuthenticationPrincipal User currentUser, Model model) {
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("users", userService.findAll());
         
@@ -23,7 +23,7 @@ public class PagesController {
     }
 
     @GetMapping("/user")
-    public String userEndpoint(@AuthenticationPrincipal ModelUser currentUser, Model model) {
+    public String userEndpoint(@AuthenticationPrincipal User currentUser, Model model) {
         model.addAttribute("currentUser", currentUser);
         return "user";
     }

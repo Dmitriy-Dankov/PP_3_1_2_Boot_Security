@@ -10,12 +10,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import ru.kata.spring.boot_security.models.ModelUser;
-import ru.kata.spring.boot_security.services.UserService;
+import ru.kata.spring.boot_security.model.User;
+import ru.kata.spring.boot_security.service.UserService;
 
 @ComponentScan(basePackages = { "ru.kata.spring.boot_security.controllers",
-        "ru.kata.spring.boot_security.services" })
+        "ru.kata.spring.boot_security.service" })
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -33,13 +32,13 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(UserService userService) {
-        return email -> {
-            ModelUser user = userService.findByEmail(email);
+        return name -> {
+            User user = userService.findByName(name);
             if (user != null) {
                 return user;
             }
 
-            throw new UsernameNotFoundException("User '" + email + "' not found");
+            throw new UsernameNotFoundException("User '" + name + "' not found");
         };
     }
 
@@ -49,11 +48,11 @@ public class SecurityConfig {
                 auth -> auth
                         .requestMatchers("/admin").hasAuthority("ADMIN")
                         .requestMatchers("/user").hasAnyAuthority("USER", "ADMIN")
-                        .requestMatchers("/registration", "/", "/**").permitAll()
+                        .requestMatchers("/", "/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login").permitAll()
-                        .usernameParameter("email")
+                        .usernameParameter("name")
                         .successHandler(successUserHandler).permitAll());
         return http.build();
     }

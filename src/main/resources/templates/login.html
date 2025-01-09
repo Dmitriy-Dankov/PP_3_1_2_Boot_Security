@@ -19,7 +19,6 @@
                 <div class="col-4">
                     <p style="text-align: right;">
                         <a th:href="@{/}" class="log_reg">Home</a>
-                        <a th:href="@{/registration}" class="log_reg">Регистрация</a>
                     </p>
                 </div>
             </div>
@@ -37,8 +36,8 @@
 
                     <form method="post" th:action="@{/login}" id="loginForm">
                         <div class="mb-3">
-                            <input type="email" name="email" class="form-control" id="email"
-                                aria-describedby="emailHelp" placeholder="Email address">
+                            <input type="text" name="name" class="form-control" id="name"
+                                aria-describedby="emailHelp" placeholder="Username">
                         </div>
                         <div class="mb-3">
                             <input type="password" name="password" class="form-control" id="password"

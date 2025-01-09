@@ -1,32 +1,27 @@
 package ru.kata.spring.boot_security;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import ru.kata.spring.boot_security.models.ModelUser;
-import ru.kata.spring.boot_security.services.UserService;
+import ru.kata.spring.boot_security.model.Role;
+import ru.kata.spring.boot_security.model.User;
+import ru.kata.spring.boot_security.service.UserService;
 
 @SpringBootApplication
 public class SpringBootSecurityDemoApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootSecurityDemoApplication.class, args);		
+		SpringApplication.run(SpringBootSecurityDemoApplication.class, args);
 	}
 
 	@Bean
-    public CommandLineRunner dataLoader(UserService userService, PasswordEncoder encoder) {
-        List<SimpleGrantedAuthority> ls = new ArrayList<>();
-		ls.add(new SimpleGrantedAuthority("ADMIN"));
-		ls.add(new SimpleGrantedAuthority("USER"));
+	public CommandLineRunner dataLoader(UserService userService) {
 		return args -> {
-           userService.save(new ModelUser(encoder.encode("123"), "admin", "admin", 34,
-                        "admin@mail.ru", ls));
-        };
-    }
+			userService.save(new User("admin", "admin", "lastName", 34,
+					"admin@mail.ru", List.of(new Role("ADMIN"), new Role("USER"))));
+			userService.save(new User("user", "user", "lastName", 18,
+					"user@mail.ru", List.of(new Role("USER"))));
+		};
+	}
 }

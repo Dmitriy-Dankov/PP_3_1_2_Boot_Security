@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.model;
 
 import java.util.Collection;
 import java.util.List;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.CollectionTable;
@@ -39,7 +40,7 @@ public class User implements UserDetails {
     private Integer age;
     private String email;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "user_role")
     private List<Role> roles;

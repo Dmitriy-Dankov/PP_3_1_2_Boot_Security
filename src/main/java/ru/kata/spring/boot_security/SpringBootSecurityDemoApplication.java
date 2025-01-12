@@ -18,9 +18,9 @@ public class SpringBootSecurityDemoApplication {
 	@Bean
 	public CommandLineRunner dataLoader(UserService userService) {
 		return args -> {
-			userService.save(new User("admin", "admin", "lastName", 34,
+			userService.save(new User("admin", "admin", "admin", 35,
 					"admin@mail.ru", List.of(new Role("ADMIN"), new Role("USER"))));
-			userService.save(new User("user", "user", "lastName", 18,
+			userService.save(new User("user", "user", "user", 30,
 					"user@mail.ru", List.of(new Role("USER"))));
 		};
 	}

@@ -16,9 +16,16 @@ public class UserDTO {
     private String surname;
     private Integer age;
     private String email;
-    private List<Role> roles = List.of(new Role("USER"));
+    private List<Role> roles;
+
+    @Override
+    public String toString() {
+        return "UserDTO [password=" + password + ", name=" + name + ", surname=" + surname + ", age=" + age + ", email="
+                + email + ", roles=" + roles + "]";
+    }
 
     public User toUser() {
         return new User(password, name, surname, age, email, roles);
     }
+
 }

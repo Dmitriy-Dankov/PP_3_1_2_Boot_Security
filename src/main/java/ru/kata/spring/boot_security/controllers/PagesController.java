@@ -7,18 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import ru.kata.spring.boot_security.model.User;
-import ru.kata.spring.boot_security.service.UserServiceImpl;
+import ru.kata.spring.boot_security.service.UserService;
 
 @Controller
 public class PagesController {
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @GetMapping("/admin")
     public String adminEndpoint(@AuthenticationPrincipal User currentUser, Model model) {
         model.addAttribute("currentUser", currentUser);
-        model.addAttribute("users", userService.findAll());
-        
+        model.addAttribute("users", userService.findAll());      
         return "admin";
     }
 

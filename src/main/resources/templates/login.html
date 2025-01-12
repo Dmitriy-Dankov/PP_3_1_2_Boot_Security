@@ -11,16 +11,14 @@
 
 <body>
     <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-8 txt_padding">
-                    <h4>Login</h4>
-                </div>
-                <div class="col-4">
-                    <p style="text-align: right;">
-                        <a th:href="@{/}" class="log_reg">Home</a>
-                    </p>
-                </div>
+        <div class="header">
+            <div class="w-50">
+                <p>Login</p>
+            </div>
+            <div class="w-50">
+                <p style="text-align: right;">
+                    <a th:href="@{/}" class="log_reg">Home</a>
+                </p>
             </div>
         </div>
     </header>
@@ -31,10 +29,10 @@
                     <div class="block_blue txt_padding"></div>
                 </div>
                 <div class="col-9 content_col_2">
-                    <h4 class="text-center">Please sign in</h4>
                     <div th:if="${error}" class="text-center">Unable to login. Check your username and password.</div>
 
                     <form method="post" th:action="@{/login}" id="loginForm">
+                        <h4 style="font-weight: 600;">Please sign in</h4>
                         <div class="mb-3">
                             <input type="text" name="name" class="form-control" id="name"
                                 aria-describedby="emailHelp" placeholder="Username">

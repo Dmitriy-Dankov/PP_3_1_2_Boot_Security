@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ru.kata.spring.boot_security.model.User;
 import ru.kata.spring.boot_security.repositorie.UserRepo;
 import ru.kata.spring.boot_security.security.UserDetailsImpl;
@@ -48,6 +47,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    @Transactional
     public void update(User user) {
         if (userRepo.existsByName(user.getName())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));

@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.security;
 
 import java.util.Collection;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.kata.spring.boot_security.model.User;

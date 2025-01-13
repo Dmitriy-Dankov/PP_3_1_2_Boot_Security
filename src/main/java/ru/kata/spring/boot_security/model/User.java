@@ -1,15 +1,14 @@
 package ru.kata.spring.boot_security.model;
 
 import java.util.List;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,9 +32,8 @@ public class User {
     private Integer age;
     private String email;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "user_role")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
     public User(String password, String name, String surname, Integer age, String email, List<Role> roles) {

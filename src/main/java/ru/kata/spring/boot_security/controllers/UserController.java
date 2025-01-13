@@ -4,14 +4,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import ru.kata.spring.boot_security.dto.UserDTO;
 import ru.kata.spring.boot_security.model.User;
 import ru.kata.spring.boot_security.service.UserService;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
-
 
 @RestController
 @RequestMapping("/api")
@@ -26,7 +23,6 @@ public class UserController {
     public Iterable<User> getMethodName() {
         return userService.findAll();
     }
-    
 
     @PostMapping("/add_user")
     public HttpStatus processAddUser(@RequestBody UserDTO form) {

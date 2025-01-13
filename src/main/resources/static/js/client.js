@@ -15,7 +15,6 @@ async function update(obj, path) {
     let response = await fetch(URL + path, {
         method: "POST",
         headers: {
-            'Accept': 'application/json',
             "Content-Type": "application/json",
             'X-XSRF-TOKEN': token            
         },

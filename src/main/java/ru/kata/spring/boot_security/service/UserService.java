@@ -6,8 +6,6 @@ public interface UserService {
     
     Iterable<User> findAll();
 
-    User findByName(String name);
-
     User findByEmail(String email);
 
     void save(User user);

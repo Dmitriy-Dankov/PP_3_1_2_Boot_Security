@@ -1,26 +1,37 @@
-import * as service from './user_service.js';
-import * as listen from './listeners.js';
 
-service.getUsers()
+function tRowToForm(from, num) {
+    const $del = document.querySelectorAll(".delete_form_btn");
+    const $edit = document.querySelectorAll(".edit_form_btn");
+    let formList;
+    const cellList = from.parentNode.parentNode.children;
 
-const $regForm = document.forms[1]
-const $editForm = document.forms[2]
-const $deleteForm = document.forms[3]
+    if (num == 0) {
+        $del.forEach(el => {
+            el.style.display = 'none';
+        });
+        $edit.forEach(el => {
+            el.style.display = 'block';
+        });
+        formList = document.forms[2]; //edit
+    } else {
+        $edit.forEach(el => {
+            el.style.display = 'none';
+        });
+        $del.forEach(el => {
+            el.style.display = 'block';
+        });
+        formList = document.forms[3]; //delete
+    }
 
-function submitListeners () {
-    $regForm.addEventListener("submit", function (event) {
-        event.preventDefault()
-        service.addUser($regForm)
-        $regForm.querySelector('#clear').click() 
-    })
-    $editForm.addEventListener("submit", function (event) {
-        event.preventDefault()
-        service.editUser($editForm)
-    })
-    $deleteForm.addEventListener("submit", function (event) {
-        event.preventDefault()
-        service.deleteUser($deleteForm)
-    })
+    formList.elements[1].value = cellList[0].innerText;
+    formList.elements[2].value = cellList[1].innerText;
+    formList.elements[3].value = cellList[2].innerText;
+    formList.elements[4].value = cellList[3].innerText;
+    formList.elements[5].value = cellList[4].innerText;
+
+    if (cellList[5].innerText == "USER") {
+        formList.elements[7].options[1].selected = 'true';
+    } else {
+        formList.elements[7].options[0].selected = 'true';
+    }
 }
-
-submitListeners();

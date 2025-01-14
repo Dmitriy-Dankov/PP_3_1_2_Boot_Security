@@ -1,17 +1,12 @@
 package ru.kata.spring.boot_security.controllers;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import ru.kata.spring.boot_security.dto.UserDTO;
 import ru.kata.spring.boot_security.model.User;
 import ru.kata.spring.boot_security.service.UserService;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
 
-@RestController
-@RequestMapping("/api")
+@Controller
 public class UserController {
     private final UserService userService;
 
@@ -19,26 +14,21 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
-    public Iterable<User> getMethodName() {
-        return userService.findAll();
-    }
-
     @PostMapping("/add_user")
-    public HttpStatus processAddUser(@RequestBody UserDTO form) {
+    public String processAddUser(UserDTO form) {
         userService.save(form.toUser());
-        return HttpStatus.OK;
+        return "redirect:/admin";
     }
 
     @PostMapping("/delete_user")
-    public HttpStatus processDeleteUser(@RequestBody Long id) {
+    public String processDeleteUser(Long id) {
         userService.delete(id);
-        return HttpStatus.OK;
+        return "redirect:/admin";
     }
 
     @PostMapping("/edit_user")
-    public HttpStatus processEditUser(@RequestBody User user) {
+    public String processEditUser(User user) {
         userService.update(user);
-        return HttpStatus.OK;
+        return "redirect:/admin";
     }
 }

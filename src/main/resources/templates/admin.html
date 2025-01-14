@@ -71,7 +71,26 @@
                                             </tr>
                                         </thead>
                                         <tbody id="user_table">
-                                            <!-- Строки таблицы -->
+                                            <tr th:each="user : ${users}">
+                                                <td th:text="${user.id}">clm-1</td>
+                                                <td th:text="${user.name}">clm-2</td>
+                                                <td th:text="${user.surname}">clm-3</td>
+                                                <td th:text="${user.age}">clm-4</td>
+                                                <td th:text="${user.email}">clm-5</td>
+                                                <td th:text="${#strings.listJoin(user.roles, ' ')}"></td>
+                                                <td><button type="button" class="t_btn" style="background: #17A2B8;"
+                                                        data-bs-toggle="modal" data-bs-target="#modal_user"
+                                                        onclick="tRowToForm(this, 0)">
+                                                        Edit
+                                                    </button>
+                                                </td>
+                                                <td><button type="button" class="t_btn" style="background: #DC3545;"
+                                                        data-bs-toggle="modal" data-bs-target="#modal_user"
+                                                        onclick="tRowToForm(this, 1)">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -79,7 +98,7 @@
                                 <div class="tab-pane fade" id="new_user-tab-pane" role="tabpanel"
                                     aria-labelledby="new_user-tab" tabindex="0">
                                     <!-- Form registration  -->
-                                    <form action="#" class="was-validated text-center">
+                                    <form method="post" th:action="@{/add_user}" class="was-validated text-center">
                                         <input readonly type="hidden" name="id" class="form-control"
                                             aria-describedby="id">
 
@@ -104,9 +123,9 @@
                                             placeholder="Password">
 
                                         <label for="roles" class="form-label">Role</label>
-                                        <select required multiple name="roles" class="form-control"
-                                            aria-label="multiple select example" size="2">
-                                            <option value="ADMIN USER">ADMIN USER</option>
+                                        <select required name="roles" class="form-control"
+                                            aria-label="select example" size="2">
+                                            <option value="ADMIN">ADMIN</option>
                                             <option value="USER">USER</option>
                                         </select>
                                         <input id="clear" type="reset" style="display: none;">
@@ -136,7 +155,7 @@
                     <div class="conteiner w-50 m-auto">
                         <!-- Форма редактирования  -->
                         <div class="edit_form_btn was-validated" style="display: none;" >
-                            <form method="post" action="#" id="id_edit">
+                            <form method="post" th:action="@{/edit_user}" id="id_edit">
                                 <label for="id" class="form-label">ID</label>
                                 <input readonly type="text" name="id" class="form-control" aria-describedby="id">
                                 
@@ -158,8 +177,8 @@
                                     placeholder="Password">
 
                                 <label for="roles" class="form-label">Role</label>
-                                <select name="roles" class="form-control" aria-label="multiple select example" size="2">
-                                    <option value="ADMIN USER">ADMIN USER</option>
+                                <select name="roles" class="form-control" aria-label="select example" size="2">
+                                    <option value="ADMIN">ADMIN</option>
                                     <option value="USER">USER</option>
                                 </select>
                             </form>
@@ -167,7 +186,7 @@
 
                         <!-- Форма удаления  -->
                         <div class="delete_form_btn" style="display: none;">
-                            <form method="post" action="#" id="id_del">
+                            <form method="post" th:action="@{/delete_user}" id="id_del">
                                 <label for="id" class="form-label">ID</label>
                                 <input readonly type="text" name="id" class="form-control" aria-describedby="id">
                                 
@@ -189,8 +208,8 @@
                                 
                                 <label for="roles" class="form-label">Role</label>
                                 <select name="roles" disabled="disabled" class="form-control"
-                                    aria-label="multiple select example" size="2">
-                                    <option value="ADMIN USER">ADMIN USER</option>
+                                    aria-label="select example" size="2">
+                                    <option value="ADMIN">ADMIN</option>
                                     <option value="USER">USER</option>
                                 </select>
                             </form>
@@ -210,7 +229,7 @@
         </div> <!-- end modal -->
 
         <script th:src="@{js/bootstrap.bundle.min.js}"></script>
-        <script type="module" th:src="@{js/main.js}"></script>
+        <script th:src="@{js/main.js}"></script>
 </body>
 
 </html>

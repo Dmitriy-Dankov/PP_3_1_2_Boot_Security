@@ -1,8 +1,6 @@
 
-const URL = "http://localhost:8080/"
-
 async function getUsers() {
-    let response = await fetch(URL + "api/users", {
+    let response = await fetch("/api/users", {
         method: "GET",
         headers: { "Content-Type": "application/json" }
     })
@@ -12,7 +10,7 @@ async function getUsers() {
 async function update(obj, path) {
     let token = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
 
-    let response = await fetch(URL + path, {
+    let response = await fetch("/" + path, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

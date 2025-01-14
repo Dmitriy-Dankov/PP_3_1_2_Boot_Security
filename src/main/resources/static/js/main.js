@@ -11,6 +11,7 @@ function submitListeners () {
     $regForm.addEventListener("submit", function (event) {
         event.preventDefault()
         service.addUser($regForm)
+        $regForm.querySelector('#clear').click() 
     })
     $editForm.addEventListener("submit", function (event) {
         event.preventDefault()

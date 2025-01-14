@@ -29,12 +29,18 @@ function tRowToForm(from, num) {
     formList.elements[3].value = cellList[3].innerText;
     formList.elements[4].value = cellList[4].innerText;
     
-    for (let i = 0; i < formList.elements[6].size; ++i ) {
-        if (formList.elements[6].options[i].value == cellList[5].innerText) {
-            formList.elements[6].options[i].selected = 'true';
-        } else if ('ADMIN USER' == cellList[5].innerText) {
-            formList.elements[6].options[0].selected = 'true';
-        }
+    // for (let i = 0; i < formList.elements[6].size; ++i ) {
+    //     if (formList.elements[6].options[i].value == cellList[5].innerText) {
+    //         formList.elements[6].options[i].selected = 'true';
+    //     } else if ('ADMIN USER' == cellList[5].innerText) {
+    //         formList.elements[6].options[0].selected = 'true';
+    //     }
+    // }
+
+    if (cellList[5].innerText == "USER") {
+        formList.elements[6].options[1].selected = 'true';
+    } else {
+        formList.elements[6].options[0].selected = 'true';
     }
 }
 

@@ -40,7 +40,7 @@ public class SecurityConfig {
                         auth -> auth
                                 .requestMatchers("/admin", "/api/**").hasAuthority("ADMIN")
                                 .requestMatchers("/user").hasAnyAuthority("USER", "ADMIN")
-                                .requestMatchers("/", "/**").permitAll()
+                                .requestMatchers( "/**").permitAll()
                                 .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login").permitAll()
